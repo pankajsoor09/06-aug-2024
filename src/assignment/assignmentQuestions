@@ -1,0 +1,159 @@
+1. Create a class called CalcAverage that has the following method:
+
+	public double avgFirstN(int N)
+
+This method receives an integer as a parameter and calculates the average of first N natural numbers. If N is not a natural number, throw an exception IllegalArgumentException with an appropriate message.
+
+2. Create a class  BankAccount having the members as given below:
+	accNo	integer
+	custName string
+	accType string (indicates ‘Savings’ or ‘Current’)
+	balance float
+
+Include the following methods in the BankAccount class:
+void deposit(float amt);
+void withdraw(float amt);
+float getBalance();
+ 	
+deposit(float amt) method allows you to credit an amount into the current balance. If amount is negative, throw an exception NegativeAmount to block the operation from being performed.
+
+withdraw(float amt) method allows you to debit an amount from the current balance. Please ensure a minimum balance of Rs. 1000/- in the account for savings account and Rs. 5000/- for current account, else throw an exception InsufficientFunds and block the withdrawal operation. Also throw an exception NegativeAmount to block the operation from being performed if the amt parameter passed to this function is negative.
+
+getBalance() method returns the current balance. If the current balance is below the minimum required balance, then throw an exception LowBalanceException accordingly.
+
+Have constructor to which you will pass, accno, cust_name, acctype and initial balance. 
+And check whether the balance is less than 1000 or not in case of savings account and less than 5000 in case of a current account. If so, then raise a LowBalanceException. 
+In either case if the balance is negative then raise the NegativeAmount exception accordingly.	
+
+
+
+3.Create a class with following specification .
+  class Emp
+  
+  empId        int 
+  empName     string 
+  designation string
+  basic       double
+  hra         double      read only
+  
+  Methods 
+           printDetails() methods will show details of the EMP.
+           calculateHRA() method will calculate HRA based on basic .
+           
+   There will 3 designations supported by the application .
+   If designation is "Manager" - HRA will be 10 % of BASIC
+   If designation  is "Officer" HRA will be 12% of BASIC
+   if category is "CLERK"  HRA will be 5% of BASIC 
+   
+   Have constructor to which you will pass, empId ,designated ,basic and name.
+   
+   and check whether the BASIC is less than 500 or not .IF it is less than 500 raise a custom Exception as given below
+   
+   create LowSalException  class with proper user message to handle BASIC less than 500.        
+
+
+
+
+
+
+public class CalcAverage {
+
+    // Method to calculate the average of the first N natural numbers
+    public double avgFirstN(int N) {
+        // Check if N is a natural number (positive integer)
+        if (N <= 0) {
+            throw new IllegalArgumentException("N must be a natural number (positive integer).");
+        }
+
+        // Calculate the sum of the first N natural numbers using the formula N * (N + 1) / 2
+        int sum = N * (N + 1) / 2;
+
+        // Calculate and return the average
+        return (double) sum / N;
+    }
+
+    public static void main(String[] args) {
+        CalcAverage calc = new CalcAverage();
+        
+        // Example usage
+        int N = 5;
+        double average = calc.avgFirstN(N);
+        System.out.println("The average of the first " + N + " natural numbers is: " + average);
+    }
+}
+
+
+
+
+package assignment;
+
+public class Emp {
+    private int empId;
+    private String empName;
+    private String designation;
+    private double basic;
+    private double hra;
+
+    public Emp(int empId, String empName, String designation, double basic) throws LowSalException {
+        if (basic < 500) {
+            throw new LowSalException("Basic salary cannot be less than 500.");
+        }
+        
+        this.empId = empId;
+        this.empName = empName;
+        this.designation = designation;
+        this.basic = basic;
+        
+        calculateHRA();
+    }
+
+    private void calculateHRA() {
+        switch (designation.toLowerCase()) {
+            case "manager":
+                this.hra = basic * 0.10;
+                break;
+            case "officer":
+                this.hra = basic * 0.12;
+                break;
+            case "clerk":
+                this.hra = basic * 0.05;
+                break;
+            default:
+                this.hra = 0;  // HRA set to 0 if designation is unknown
+                break;
+        }
+    }
+
+    public void printDetails() {
+        System.out.println("Employee ID: " + empId);
+        System.out.println("Employee Name: " + empName);
+        System.out.println("Designation: " + designation);
+        System.out.println("Basic Salary: Rs." + basic);
+        System.out.println("HRA: Rs." + hra);
+    }
+}
+
+
+
+package assignment;
+
+public class EmpTest {
+    public static void main(String[] args) {
+        try {
+            Emp emp1 = new Emp(101, "Raj", "Manager", 600.0);
+            emp1.printDetails();
+
+            System.out.println();
+
+            Emp emp2 = new Emp(102, "Shiv", "Officer", 400.0);  // This will throw LowSalException
+            emp2.printDetails();
+        } catch (LowSalException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+
+
+
+

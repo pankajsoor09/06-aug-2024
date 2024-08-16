@@ -1,0 +1,65 @@
+Exception handling  (exception comes always on run time) 
+Exception(a particular condition in that application will not run properly it will terminate abruptly without given desired output)
+io Exception 
+sql Exception
+clone not found Exception
+class not found Exception
+runtime -------class cast Exception,null pointer Exception,arrayIndexout of Bound Exception,Number format Exception,arithmetic exception
+
+
+exception classes are divided into two  -- checked Exception (compiler is checking weather we handled Exception or not ..if not handled compile time erro)inherited from Exception class
+-- unchecked Exception(complier does not check weather exception is handled or not)inherited from runtime exception
+ 
+   try  -- exception might come 
+   catch(Exception e) --  to handled exception 
+   
+   try{
+   sop(a/b);
+   }
+   catch(Exception){
+   }
+ ---------------------------------------      
+ 
+  
+  
+  finally block execute  always---there must be a try block for finally .---finally will not handle exception.
+  finally{
+  //prints
+  } 
+  
+  try{
+   //exception might come 
+   }
+   catch(Exception){
+   // handled exception 
+   }
+   finally{
+   //
+   } 
+   only one finally for one try and catch
+   if catch is not written then also finally will give output.but there is exception in try then we will get try exception and finally
+   
+   
+   throw and throws 
+   throw -- used to throw the exception explicitly  
+   throws -- used to declaring the exception
+   
+   handle or declare 
+   
+   void division (int n1, int n2,int n2)throws ArithmeticException,IOException{// declare exception
+   sop(n1/n2);caller method will handle exception
+   }   
+   
+   user Define Exceptions:
+   class MyException extends Exception{
+     MyException (String msg){
+           super(msg);
+           }
+       }
+       java.lang
+       public class Exception{
+       Exception(string message){ message is instance variable
+         this.message = message;
+         }
+         }    
+                            
